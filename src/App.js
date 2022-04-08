@@ -8,10 +8,21 @@ import Diary from './pages/Diary'
 
 // COMPONENTS
 import MyButton from './components/MyButton';
+import MyHeader from './components/MyHeader';
+
 function App() {
   return (
     <Router>
       <div className="App">
+        <MyHeader
+          headText={"App"}
+          leftchild={
+            <MyButton text={"왼쪽버튼"} onClick={() => alert("왼쪽클릭")} />
+          }
+          rightchild= {
+            <MyButton text={"오른쪽버튼"} onClick={() => alert("오른쪽클릭")} />
+          }
+        />
         <h2>App.js</h2>
         {/* process.env.PUBLIC_URL는 public파일을 바로 가리키는 주소이다. */}
 
@@ -27,10 +38,9 @@ function App() {
           onClick={() => alert("버튼클릭")}
         />
 
-        <MyButton
-          text={"버튼"}         
-          onClick={() => alert("버튼클릭")}
-        />
+        <MyButton text={"버튼"} type={"s"} onClick={() => alert("버튼클릭")} />
+
+        <MyButton text={"버튼"} onClick={() => alert("버튼클릭")} />
 
         <Routes>
           <Route path="/" element={<Home />} />

@@ -1,13 +1,14 @@
 import Button from '@mui/material/Button';
 
 const MyButton = ({text, type, onClick}) => {
+    const btnType = ['success', 'error'].includes(type)? type:'secondary';
     // type = secondary(nomal), success, error
     return (
         <Button  
-            className={['MyButton',`Mybutton_${type}`].join(" ")}
+            className={['MyButton',`Mybutton_${btnType}`].join(" ")}
             onClick = {onClick}
             variant = 'outlined'
-            color={type}       
+            color={btnType}       
         >
         {text}
         </Button>
