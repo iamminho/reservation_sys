@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import New from './pages/New'
 import Edit from './pages/Edit'
 import Diary from './pages/Diary'
+import Example from './components/Example';
 
 const reducer = (state,action) => {
   let newState = [];
@@ -37,10 +38,43 @@ const reducer = (state,action) => {
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
+const dummyData = [
+  {
+    id: 1,
+    emotion:1,
+    content: "오늘의일기 1번",
+    date : 1649414137393
+  },
+  {
+    id: 2,
+    emotion:2,
+    content: "오늘의일기 2번",
+    date : 1649414137394
+  },
+  {
+    id: 3,
+    emotion:3,
+    content: "오늘의일기 3번",
+    date : 1649414137395
+  },
+  {
+    id: 4,
+    emotion:4,
+    content: "오늘의일기 4번",
+    date : 1649414137396
+  },
+  {
+    id: 5,
+    emotion:5,
+    content: "오늘의일기 5번",
+    date : 1649414137397
+  }
+]
+
 function App() {  
 
-  const [data,dispatch] = useReducer(reducer, []);
-
+  const [data,dispatch] = useReducer(reducer, dummyData);
+  
   const dataId = useRef(0);
   // CREATE
   const onCreate = (date, content, emotion) => {
@@ -77,6 +111,7 @@ function App() {
       <DiaryDispatchContext.Provider value={{onCreate, onEdit, onRemove}}>
         <Router>
           <div className="App">
+            <Example/>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/new" element={<New />} />
@@ -87,7 +122,9 @@ function App() {
         </Router>
       </DiaryDispatchContext.Provider>
     </DiaryStateContext.Provider>
-  );    
+    
+  );
+      
 }
 
 export default App;
