@@ -182,7 +182,21 @@ header .head_btn_right {
   display: grid;
   grid-template-columns: repeat(5, auto); 
   gap: 2%;
+}
 
+.DiaryEditor textarea{
+  font-size: 20px;
+  
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 200px;
+  resize: vertical;
+
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+
+  padding: 20px;
 }
 /* Emotion Item */
 
@@ -197,6 +211,8 @@ header .head_btn_right {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  
 }
 
 .EmotionItem img{
