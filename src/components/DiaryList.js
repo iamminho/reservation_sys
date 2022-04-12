@@ -5,6 +5,13 @@ const sortOptionList = [
   {value:"oldest", name: "오래된 순"},
 ];
 
+const filterOptionList = [
+  {value:"all", name:"전부다"},
+  {value: "good", name: "좋은감정만"},
+  {value: "bad", name:"안좋은감정만"}
+
+]
+
 const ControlMenu = ({ value, onChange, optionList}) => {
   return (
     <select value={value} onChange={(e) => onChange(e.target.value)}>
@@ -19,8 +26,18 @@ const ControlMenu = ({ value, onChange, optionList}) => {
 const DiaryList = ({ diaryList }) => {  
   console.log(diaryList);
   const [sortType, setSortType] = useState("lastest");
+  const [filter,setFilter] = useState("all");
 
   const getProcessdDiaryList = ()=> {
+
+    const filterCallBack = (item) => {
+      if(filter === 'good'){
+        return parseInt(item.emotion) <= 3;
+      }else{
+        return parseInt(item.emotion) > 3;
+      }
+    }
+
     const compare = (a,b) => {
       if(sortType === "latest") {
         return parseInt(b.date) - parseInt(a.date);
@@ -30,7 +47,8 @@ const DiaryList = ({ diaryList }) => {
     };
 
     const copyList = JSON.parse(JSON.stringify(diaryList));
-    const sortedList = copyList.sort(compare);
+    const filteredList = filter === 'all' ? copyList : copyList.filter((it) => filterCallBack(it))
+    const sortedList = filteredList.sort(compare);
     return sortedList;
   }
   
@@ -42,8 +60,15 @@ const DiaryList = ({ diaryList }) => {
         onChange={setSortType}
         optionList={sortOptionList}
       />
+      <ControlMenu
+        value={filter}
+        onChange={setFilter}
+        optionList={filterOptionList}
+      />
+      {/* getProcessdDiaryList~ 부분을 주석처리 했다가 다시 주석해제하면 에러가 없어진다? */}
+      {/* 문제: 갑자기 diaryList를 배열로 인식 못함 */}
       {getProcessdDiaryList().map((it) => (
-        <div key={it.id}>{it.content}</div>
+        <div key={it.id}>{it.content} {it.emotion}</div>
       ))}
     </div>
   );

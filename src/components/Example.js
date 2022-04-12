@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-const reducer = (state,action) => {
+const reducer = (state, action) => {
     switch (action.type) {
         case "SAVE":
             return state + action.inputMoney;
