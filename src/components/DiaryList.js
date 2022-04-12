@@ -31,7 +31,6 @@ const ControlMenu = ({ value, onChange, optionList }) => {
 };
 const DiaryList = ({ diaryList }) => {  
   const navigate = useNavigate();
-  console.log(diaryList);
   const [sortType, setSortType] = useState("lastest");
   const [filter,setFilter] = useState("all");
 
@@ -52,8 +51,9 @@ const DiaryList = ({ diaryList }) => {
         return parseInt(a.date) - parseInt(b.date);
       }
     };
-
+    
     const copyList = JSON.parse(JSON.stringify(diaryList));
+    console.log(copyList);
     const filteredList = filter === 'all' ? copyList : copyList.filter((it) => filterCallBack(it))
     const sortedList = filteredList.sort(compare);
     return sortedList;
@@ -86,12 +86,12 @@ const DiaryList = ({ diaryList }) => {
 
       {/* getProcessdDiaryList~ 부분을 주석처리 했다가 다시 주석해제하면 에러가 없어진다? */}
       {/* 문제: 갑자기 diaryList를 배열로 인식 못함 */}
-      {getProcessdDiaryList().map((it) => (
+      {/* {getProcessdDiaryList().map((it) => (          
         <DiaryItem key={it.id}
           {...it}
         />
        
-      ))}
+      ))} */}
     </div>
   );
 };
